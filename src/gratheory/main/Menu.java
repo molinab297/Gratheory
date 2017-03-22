@@ -7,6 +7,8 @@ import java.util.ArrayList;
  * different actions. */
 public class Menu {
 
+    public int hi;
+
     Button menuButton;
     private ArrayList<Button> buttonList; // holds the list of buttons
 
