@@ -4,13 +4,19 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 import static processing.core.PApplet.str;
 
-/* Class which acts as both a container and drawer for all vertices and edges in a graph.
-*
-* CONSTRUCTOR INPUTS:
-*   int [][] otherMatrix - A Graph object only needs a single piece of information. An adjancy matrix representation
-*   of a graph. This provides the information necessary to create all vertices and edges in the graph.
-*
-* */
+/*******************************************************************
+ *  CLASS Graph
+ *
+ *  OVERVIEW: Class which acts as both a container and drawer for
+ *  all vertices and edges in a graph.
+ *
+ *  CONSTRUCTOR PARAMETERS:
+ *   otherMatrix<int[][]> : A Graph object only needs a single piece of
+ *   information. An adjancy matrix representation of a graph. This
+ *   provides the information necessary to create all vertices and edges
+ *   in the graph.
+
+ ********************************************************************/
 public class Graph {
 
     private ArrayList<Vertex> vertexList; // Contains all the vertices in the graph
