@@ -36,4 +36,17 @@ public class Button {
             return false;
     }
 
+    public void setxCoord(int x){ xCoord = x; }
+    public void setyCoord(int y) { yCoord = y; }
+    public void setWidth(int w) { width = w; }
+    public void setHeight(int h) { height = h; }
+    public void setColor(int c) { color = c; }
+    public void setTextColor(int tc) { textColor = tc; }
+    public int xCoord() { return xCoord; }
+    public int yCoord() { return yCoord; }
+    public int width() { return width; }
+    public int height() { return height; }
+    public int color() { return color; }
+    public int textColor() { return textColor; }
+
 }

@@ -20,10 +20,7 @@ public class Menu {
         buttonList.add(newButton);
     }
 
-    void removeButton(){
 
-    }
-    
     // displays the menu button
     void display(PApplet p){
         menuButton.display(p);
@@ -31,7 +28,11 @@ public class Menu {
 
     // displays a dropdown list of all the other buttons
     void displayOptions(PApplet p){
-
+        int x = menuButton.xCoord();
+        int y = menuButton.yCoord();
+        for(Button b : buttonList){
+            b.display(p);
+        }
     }
 
     boolean overButton(int x, int y, int width, int height, PApplet p){
