@@ -13,7 +13,7 @@ public class Gratheory extends PApplet{
     private boolean menuClicked;
 
     public void settings(){
-        size(SCREEN_WIDTH, SCREEN_HEIGHT);
+        size(SCREEN_WIDTH, SCREEN_HEIGHT); //
     }
 
     public void setup() {
