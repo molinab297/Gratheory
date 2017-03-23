@@ -44,10 +44,10 @@ public class Graph {
         int temp = 25;
         for (int x = 0; x < rows; x++)
             vertexList.add(new Vertex(temp % (x + 1) * x + temp * (x + 1),
-                    temp % (x + 1) * temp + temp * (x + 1), 25, 25, 100));
+                    temp % (x + 1) * temp + temp * (x + 1), 25, 25, 100, x));
     }
 
-    /* Draws the Graph. Only call within the draw() method of AlgoGraph. */
+    /* Draws the Graph. Only call within the draw() method of Gratheory. */
     public void display(PApplet p) {
         drawEdges(p);
         drawVertices(p);
@@ -59,7 +59,7 @@ public class Graph {
             vertexList.get(x).display(p);
             p.fill(255, 255, 0);
             p.textAlign(p.CENTER, p.CENTER);
-            p.text(str(x), vertexList.get(x).getXCoord(), vertexList.get(x).getYCoord());
+            p.text(str(x), vertexList.get(x).xCoord(), vertexList.get(x).yCoord());
         }
     }
 
@@ -68,7 +68,7 @@ public class Graph {
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < x; y++) {
                 if (matrix[x][y] == 1) {
-                    p.line(vertexList.get(x).getXCoord(), vertexList.get(x).getYCoord(), vertexList.get(y).getXCoord(), vertexList.get(y).getYCoord());
+                    p.line(vertexList.get(x).xCoord(), vertexList.get(x).yCoord(), vertexList.get(y).xCoord(), vertexList.get(y).yCoord());
                 }
             }
         }
@@ -83,8 +83,8 @@ public class Graph {
         }
     }
 
-    void addVertex(int x, int y, int w, int h, int c){
-        Vertex newVertex = new Vertex(x,y,w,h,c);
+    void addVertex(int x, int y, int w, int h, int c, int id){
+        Vertex newVertex = new Vertex(x,y,w,h,c, id);
         vertexList.add(newVertex);
     }
 

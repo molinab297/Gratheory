@@ -6,10 +6,11 @@ import java.util.ArrayList;
 /*******************************************************************
  *  CLASS Menu EXTENDS Button
  *
- *  OVERVIEW: A class that represents a Menu object. A Menu contains a
- *  drop down list of clickable buttons. Being that the primary purpose
- *  of a Menu object is to only display the drop down menu of buttons,
- *  the functionality of the buttons will need to be implemented.
+ *  OVERVIEW: A class that represents a Menu object. While a Menu is
+ *  a type of button, it contains a drop down list of clickable buttons.
+ *  Being that the primary purpose of a Menu object is to only display
+ *  the drop down menu of buttons, the functionality of the buttons will
+ *  need to be implemented.
  *
  *  CONSTRUCTOR PARAMETERS:
  *   - (Refer to CLASS Button)
@@ -54,6 +55,10 @@ public class Menu extends Button{
             b.display(p);
             y = b.yCoord() + b.height();
         }
+    }
+
+    public Button getButton(int pos){
+        return buttonList.get(pos);
     }
 
     // Detects if a mouse is hovering over this object
