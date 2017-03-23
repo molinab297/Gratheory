@@ -3,40 +3,67 @@ import processing.core.PApplet;
 
 import java.util.ArrayList;
 
-/* A container that holds a list of buttons for performing
- * different actions. */
-public class Menu {
+/*******************************************************************
+ *  CLASS Menu EXTENDS Button
+ *
+ *  OVERVIEW: A class that represents a Menu object. While a Menu is
+ *  a type of button, it contains a drop down list of clickable buttons.
+ *  Being that the primary purpose of a Menu object is to only display
+ *  the drop down menu of buttons, the functionality of the buttons will
+ *  need to be implemented.
+ *
+ *  CONSTRUCTOR PARAMETERS:
+ *   - (Refer to CLASS Button)
+ ********************************************************************/
+public class Menu extends Button{
 
-    Button menuButton;
     private ArrayList<Button> buttonList; // holds the list of buttons
 
     public Menu(int x, int y, int w, int h, int buttonColor, int textColor, String text){
-        menuButton = new Button(x,y,w,h,buttonColor,textColor, text);
+        super(x,y,w,h,buttonColor,textColor, text);
         buttonList = new ArrayList<>();
     }
 
-
-    void addButton(Button newButton){
-        buttonList.add(newButton);
+    public void addButton(String text){
+        buttonList.add(new Button(0,0,0,0,super.color(),super.textColor(),text));
     }
 
-
-    // displays the menu button
-    void display(PApplet p){
-        menuButton.display(p);
+    public void addButton(int buttonColor, String text){
+        buttonList.add(new Button(0,0,0,0,buttonColor,super.textColor(),text));
     }
 
-    // displays a dropdown list of all the other buttons
-    void displayOptions(PApplet p){
-        int x = menuButton.xCoord();
-        int y = menuButton.yCoord();
+    public void addButton(int buttonColor, int textColor, String text){
+        buttonList.add(new Button(0,0,0,0,buttonColor,textColor,text));
+    }
+
+    // Displays the menu button
+    public void display(PApplet p){
+        super.display(p);
+    }
+
+    // Displays a dropdown list of all the other buttons
+    public void displayOptions(PApplet p){
+        int x = super.xCoord();
+        int y = super.yCoord();
+        int width = super.width();
+        int height = super.height();
+        y = y + height;
+
         for(Button b : buttonList){
+            b.setCoordinates(x,y);
+            b.setSize(width,height);
             b.display(p);
+            y = b.yCoord() + b.height();
         }
     }
 
-    boolean overButton(int x, int y, int width, int height, PApplet p){
-        return menuButton.overButton(x, y, width, height, p);
+    public Button getButton(int pos){
+        return buttonList.get(pos);
+    }
+
+    // Detects if a mouse is hovering over this object
+    public boolean overButton(int mouseX, int mouseY){
+        return super.overButton(mouseX,mouseY);
     }
 
 }
