@@ -1,12 +1,25 @@
 package gratheory.main;
-
-
 import processing.core.PApplet;
 
-/* Class that represents a single Edge to be displayed on a Graph. */
+/*******************************************************************
+ *  CLASS Edge
+ *
+ *  OVERVIEW: A class that represents a single Edge object. An edge
+ *  object is defined to have a source and destination vertex, although
+ *  in an undirected graph, this will not matter which vertex is which.
+ *
+ *  CONSTRUCTOR PARAMETERS:
+ *   source <Vertex>  : source vertex
+ *   dest<Vertex>     : destination vertex
+ *   color<int>       : color of edge
+ *   weight<int>      : weight of edge
+ *
+ ********************************************************************/
 public class Edge {
-    Vertex source, dest;
-    int color, weight;
+
+    private Vertex source, dest;
+    private int color, weight;
+    PApplet parent;
 
     public Edge(){
         source = null;
@@ -22,32 +35,28 @@ public class Edge {
         weight = w;
     }
 
-    public void display(PApplet p){
-
+    /* Draws individual edge to screen */
+    public void display(PApplet parent){
+        parent.stroke(color);
+        parent.line(source.xCoord(),source.yCoord(),dest.xCoord(),dest.yCoord());
     }
 
     public void setWeight(int w){
         weight = w;
     }
-    public void setColor(int c) {
-        color = c; }
-
+    public void setColor(int c){ color = c; }
     public void setSource(Vertex s){
         source = s;
     }
     public void setDest(Vertex d){
         dest = d;
     }
-    public Vertex getSource() {
-        return source;
-    }
-    public Vertex getDest() {
-        return dest; }
-
-    public int getColor() {
+    public Vertex source() { return source; }
+    public Vertex dest() { return dest; }
+    public int color() {
         return color;
     }
-    public int getWeight() {
+    public int weight() {
         return weight;
     }
 }

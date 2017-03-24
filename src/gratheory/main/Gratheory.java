@@ -1,6 +1,6 @@
 package gratheory.main;
+import gratheory.algorithms.BFS;
 import processing.core.PApplet;
-import java.util.Vector;
 
 /* Main driver class */
 public class Gratheory extends PApplet{
@@ -13,15 +13,21 @@ public class Gratheory extends PApplet{
     private boolean menuClicked;
 
     public void settings(){
-        size(SCREEN_WIDTH, SCREEN_HEIGHT); //
+        size(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
     public void setup() {
-        graph = new Graph(new int[][]{{0, 1, 0, 1}, {1, 0, 1, 0}, {0, 1, 0, 1}, {1, 0, 1, 0}});
-        menu = new Menu(SCREEN_WIDTH-100,20,80,30,color(255),0,"Menu");
+        graph = new Graph(new int[][]{{0, 1, 0, 1},
+                                      {1, 0, 1, 0},
+                                      {0, 1, 0, 1},
+                                      {1, 0, 1, 0}}, this);
+
+        menu = new Menu(SCREEN_WIDTH-100,20,80,30,color(255),0,"Menu", this);
         menu.addButton(167, "New Vertex");
         menu.addButton(167, "New Edge");
         menu.addButton(167, "Save");
+
+        BFS bfs = new BFS(graph, graph.getVertex(0));
 
 
         strokeWeight(2);
@@ -32,15 +38,15 @@ public class Gratheory extends PApplet{
     // Main draw method is all cleaned up and organized now :-)
     public void draw() {
         background(0, 0, 20);
-        graph.display(this);
-        menu.display(this);
+        graph.display();
+        menu.display();
         update();
         checkIfDragging();
     }
 
     public void update(){
         if(menuClicked)
-            menu.displayOptions(this);
+            menu.displayOptions();
     }
 
     public void mouseClicked(){
@@ -54,7 +60,7 @@ public class Gratheory extends PApplet{
 
     /* Checks if vertex is being dragged. If it is, make vertex follow user's mouse. */
     public void checkIfDragging(){
-        for (int x = 0; x < graph.getRows(); x++) {
+        for (int x = 0; x < graph.rows(); x++) {
             Vertex curr = graph.getVertex(x);
             if (dist(curr.xCoord(), curr.yCoord(), mouseX, mouseY) < 25 / 2) {
                 if (mousePressed) {

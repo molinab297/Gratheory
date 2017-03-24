@@ -17,32 +17,34 @@ import java.util.ArrayList;
  ********************************************************************/
 public class Menu extends Button{
 
+    PApplet parent;
     private ArrayList<Button> buttonList; // holds the list of buttons
 
-    public Menu(int x, int y, int w, int h, int buttonColor, int textColor, String text){
-        super(x,y,w,h,buttonColor,textColor, text);
+    public Menu(int x, int y, int w, int h, int buttonColor, int textColor, String text, PApplet parent){
+        super(x,y,w,h,buttonColor,textColor, text, parent);
+        this.parent = parent;
         buttonList = new ArrayList<>();
     }
 
     public void addButton(String text){
-        buttonList.add(new Button(0,0,0,0,super.color(),super.textColor(),text));
+        buttonList.add(new Button(0,0,0,0,super.color(),super.textColor(),text, parent));
     }
 
     public void addButton(int buttonColor, String text){
-        buttonList.add(new Button(0,0,0,0,buttonColor,super.textColor(),text));
+        buttonList.add(new Button(0,0,0,0,buttonColor,super.textColor(),text, parent));
     }
 
     public void addButton(int buttonColor, int textColor, String text){
-        buttonList.add(new Button(0,0,0,0,buttonColor,textColor,text));
+        buttonList.add(new Button(0,0,0,0,buttonColor,textColor,text, parent));
     }
 
-    // Displays the menu button
-    public void display(PApplet p){
-        super.display(p);
+    /* Displays the menu button */
+    public void display(){
+        super.display();
     }
 
-    // Displays a dropdown list of all the other buttons
-    public void displayOptions(PApplet p){
+    /* Displays a dropdown list of all the other buttons */
+    public void displayOptions(){
         int x = super.xCoord();
         int y = super.yCoord();
         int width = super.width();
@@ -52,18 +54,18 @@ public class Menu extends Button{
         for(Button b : buttonList){
             b.setCoordinates(x,y);
             b.setSize(width,height);
-            b.display(p);
+            b.display();
             y = b.yCoord() + b.height();
         }
     }
 
-    public Button getButton(int pos){
-        return buttonList.get(pos);
-    }
-
-    // Detects if a mouse is hovering over this object
+    /* Detects if a mouse is hovering over this object */
     public boolean overButton(int mouseX, int mouseY){
         return super.overButton(mouseX,mouseY);
+    }
+
+    public Button getButton(int pos){
+        return buttonList.get(pos);
     }
 
 }

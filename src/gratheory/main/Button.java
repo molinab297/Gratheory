@@ -1,6 +1,5 @@
 package gratheory.main;
 import processing.core.PApplet;
-import processing.core.PConstants;
 
 /*******************************************************************
  *  CLASS Button
@@ -21,10 +20,12 @@ import processing.core.PConstants;
  *   Note: to pass an RGB color, pass parameter as color(r,g,b).
  ********************************************************************/
 public class Button {
+    PApplet parent;
     private String text;
     private int xCoord, yCoord, width, height, color, textColor;
 
-    public Button(int x, int y, int w, int h, int buttonColor, int tColor, String t){
+    public Button(int x, int y, int w, int h, int buttonColor, int tColor, String t, PApplet parent){
+        this.parent = parent;
         xCoord = x;
         yCoord = y;
         width  = w;
@@ -34,11 +35,11 @@ public class Button {
         text   = t;
     }
 
-    void display(PApplet p){
-        p.fill(color);
-        p.rect(xCoord, yCoord, width, height);
-        p.fill(textColor);
-        p.text(text,xCoord+width/2,yCoord+height/2);
+    void display(){
+        parent.fill(color);
+        parent.rect(xCoord, yCoord, width, height);
+        parent.fill(textColor);
+        parent.text(text,xCoord+width/2,yCoord+height/2);
     }
 
     // Detects if a mouse is hovering over this object
