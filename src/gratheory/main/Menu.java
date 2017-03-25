@@ -25,7 +25,7 @@ public class Menu extends Button{
     }
 
     public void addButton(String text){
-        buttonList.add(new Button(0,0,0,0,super.color(),super.textColor(),text));
+        buttonList.add(new Button(0,0,0,0,super.getColor(),super.textColor(),text));
     }
 
     public void addButton(int buttonColor, String text){
@@ -36,34 +36,34 @@ public class Menu extends Button{
         buttonList.add(new Button(0,0,0,0,buttonColor,textColor,text));
     }
 
-    // Displays the menu button
-    public void display(PApplet p){
-        super.display(p);
+    /* Displays the menu button */
+    public void display(PApplet draw){
+        super.display(draw);
     }
 
-    // Displays a dropdown list of all the other buttons
-    public void displayOptions(PApplet p){
-        int x = super.xCoord();
-        int y = super.yCoord();
-        int width = super.width();
-        int height = super.height();
+    /* Displays a dropdown list of all the other buttons */
+    public void displayOptions(PApplet draw){
+        int x = super.getxCoord();
+        int y = super.getyCoord();
+        int width = super.getWidth();
+        int height = super.getHeight();
         y = y + height;
 
         for(Button b : buttonList){
             b.setCoordinates(x,y);
             b.setSize(width,height);
-            b.display(p);
-            y = b.yCoord() + b.height();
+            b.display(draw);
+            y = b.getyCoord() + b.getHeight();
         }
+    }
+
+    /* Detects if a mouse is hovering over this object */
+    public boolean overButton(int mouseX, int mouseY){
+        return super.overButton(mouseX,mouseY);
     }
 
     public Button getButton(int pos){
         return buttonList.get(pos);
-    }
-
-    // Detects if a mouse is hovering over this object
-    public boolean overButton(int mouseX, int mouseY){
-        return super.overButton(mouseX,mouseY);
     }
 
 }

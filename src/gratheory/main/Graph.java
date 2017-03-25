@@ -1,9 +1,7 @@
 package gratheory.main;
 import processing.core.PApplet;
-
 import java.util.ArrayList;
 import static processing.core.PApplet.str;
-
 /*******************************************************************
  *  CLASS Graph
  *
@@ -11,7 +9,7 @@ import static processing.core.PApplet.str;
  *  all vertices and edges in a graph.
  *
  *  CONSTRUCTOR PARAMETERS:
- *   otherMatrix<int[][]> : A Graph object only needs a single piece of
+ *   otherMatrix (int[][]) : A Graph object only needs a single piece of
  *   information. An adjancy matrix representation of a graph. This
  *   provides the information necessary to create all vertices and edges
  *   in the graph.
@@ -19,17 +17,18 @@ import static processing.core.PApplet.str;
  ********************************************************************/
 public class Graph {
 
-    private ArrayList<Vertex> vertexList; // Contains all the vertices in the graph
-    private ArrayList<Edge> edgeList; // Contains all the edges in the graph
-    private int [][]matrix; // Holds an adjancy matrix version of the graph, for initialization purposes.
-    private int rows, columns;
+    private PApplet parent;
+    private ArrayList<Vertex> vertexList;
+    private ArrayList<Edge> edgeList;
+    private int [][]matrix;
+    private final int ROWS, COLUMNS;
 
-    public Graph(int [][] otherMatrix){
-        columns = otherMatrix[0].length;
-        rows = otherMatrix.length;
-        matrix = new int[rows][columns];
+    public Graph(int [][] otherMatrix, PApplet parent){
+        this.parent = parent;
+        COLUMNS = otherMatrix[0].length;
+        ROWS = otherMatrix.length;
+        matrix = new int[ROWS][COLUMNS];
 
-        /* Performs a shallow copy of otherMatrix to this.matrix. */
         for (int i = 0; i < otherMatrix.length; i++) {
             System.arraycopy(otherMatrix[i], 0, matrix[i], 0, otherMatrix[0].length);
         }
@@ -39,53 +38,72 @@ public class Graph {
 
     /* Creates all the vertices with their positions and sizes on the graph. */
     private void initializeGraph(){
-        vertexList = new ArrayList<Vertex>();
-        edgeList   = new ArrayList<Edge>();
+        vertexList = new ArrayList<>();
+        edgeList   = new ArrayList<>();
         int temp = 25;
-        for (int x = 0; x < rows; x++)
-            vertexList.add(new Vertex(temp % (x + 1) * x + temp * (x + 1),
-                    temp % (x + 1) * temp + temp * (x + 1), 25, 25, 100, x));
-    }
 
-    /* Draws the Graph. Only call within the draw() method of Gratheory. */
-    public void display(PApplet p) {
-        drawEdges(p);
-        drawVertices(p);
+        /* Initializes vertices */
+        for (int x = 0; x < ROWS; x++)
+            vertexList.add(new Vertex(temp % (x + 12) * x + temp * (x + 12),
+                    temp % (x + 5) * temp + temp * (x + 5), 25, 25, 100, x));
+
+        /* Initializes edges */
+        for (int x = 0; x < ROWS; x++) {
+            for (int y = 0; y < COLUMNS; y++) {
+                if (matrix[x][y] == 1 && !edgeExist(vertexList.get(x),vertexList.get(y))) {
+                        edgeList.add(new Edge(vertexList.get(x), vertexList.get(y), 255, -1));
+                }
+            }
+        }
+
     }
 
     /* Draws all vertices in the graph to the screen */
-    private void drawVertices(PApplet p){
-        for (int x = 0; x < rows; x++) {
-            vertexList.get(x).display(p);
-            p.fill(255, 255, 0);
-            p.textAlign(p.CENTER, p.CENTER);
-            p.text(str(x), vertexList.get(x).xCoord(), vertexList.get(x).yCoord());
+    private void drawVertices(){
+        int counter = 0;
+        for(Vertex v: vertexList){
+            v.display(parent);
+            parent.fill(255, 255, 0);
+            parent.textAlign(parent.CENTER, parent.CENTER);
+            parent.text(str(counter), v.getxCoord(), v.getyCoord());
+            counter++;
         }
     }
 
     /* Draws all edges in the graph to the screen. */
-    public void drawEdges(PApplet p){
-        for (int x = 0; x < rows; x++) {
-            for (int y = 0; y < x; y++) {
-                if (matrix[x][y] == 1) {
-                    p.line(vertexList.get(x).xCoord(), vertexList.get(x).yCoord(), vertexList.get(y).xCoord(), vertexList.get(y).yCoord());
-                }
-            }
-        }
+    private void drawEdges(){
+        for(Edge e: edgeList)
+            e.display(parent);
     }
 
-    /* Resets the graph by reassigning all vertices to their initial coordinates. */
-    public void reset(){
-        int temp = 25;
-        for (int x = 0; x < rows; x++) {
-            vertexList.get(x).setXCoord(temp % (x + 1) * x + temp * (x + 1));
-            vertexList.get(x).setYCoord(temp % (x + 1) * temp + temp * (x + 1));
-        }
+    /* Draws the Graph. Only call within the draw() method of Gratheory. */
+    public void display() {
+        drawEdges();
+        drawVertices();
     }
+
+
+    /* Given two vertices, this function returns whether or a not an edge connects them. */
+    public boolean edgeExist(Vertex a, Vertex b){
+        for(Edge e : edgeList){
+            if(e.connects(a,b))
+                return true;
+        }
+        return false;
+    }
+
+    /* Returns the incident edge between vertex 'A' and vertex 'B' */
+    public Edge getEdge(Vertex a, Vertex b){
+            for(Edge e : edgeList){
+                if(e.connects(a,b))
+                    return edgeList.get(edgeList.indexOf(e));
+        }
+        return null;
+    }
+
 
     void addVertex(int x, int y, int w, int h, int c, int id){
-        Vertex newVertex = new Vertex(x,y,w,h,c, id);
-        vertexList.add(newVertex);
+        vertexList.add(new Vertex(x,y,w,h,c,id));
     }
 
     void addVertex(Vertex newVertex){
@@ -93,27 +111,23 @@ public class Graph {
     }
 
     void addEdge(Vertex s, Vertex d, int c, int w){
-        Edge newEdge = new Edge(s,d,c,w);
-        edgeList.add(newEdge);
-    }
-
-    void addEdge(Edge newEdge){
-        edgeList.add(newEdge);
+        edgeList.add(new Edge(s,d,c,w));
     }
 
     public Vertex getVertex(int pos){
         return vertexList.get(pos);
     }
 
-    public Edge getEdge(int pos){
-        return edgeList.get(pos);
+    public final int rows() {
+        return ROWS;
+    }
+    public final int columns() {
+        return COLUMNS;
     }
 
-    public int getRows() {
-        return rows;
-    }
-    public int getColumns() {
-        return columns;
-    }
+    /* Returns index of the graph's adjancy matrix. */
+    public int getIndex(int x, int y) { return matrix[x][y]; }
+
+    public PApplet parent() { return parent; }
 
 }
