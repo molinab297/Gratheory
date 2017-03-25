@@ -4,31 +4,29 @@ import processing.core.PApplet;
 import java.util.HashSet;
 
 
-/* Class that represents a single vertex to be displayed on a Graph. */
-public class Vertex{
-    private int xCoord, yCoord, width, height, color, id;
+/*******************************************************************
+ *  CLASS Vertex
+ *
+ *  OVERVIEW: A class that represents a single Vertex object.
+ *
+ *  CONSTRUCTOR PARAMETERS:
+ *      id (int) : row position in the adjancy matrix represents the vertex's ID.
+ *
+ *      (Refer to Class Shape to see rest).
+ *
+ ********************************************************************/
+public class Vertex extends Shape{
+    private int id;
 
     public Vertex(int x, int y, int w, int h, int c, int id){
-        xCoord = x;
-        yCoord = y;
-        width  = w;
-        height = h;
-        color  = c;
+        super(x,y,w,h,c);
         this.id = id;
     }
 
-    public void display(PApplet parent){
-        parent.fill(color);
-        parent.ellipse(xCoord, yCoord, width, height);
+    public void display(PApplet draw){
+        draw.fill(getColor());
+        draw.ellipse(getxCoord(), getyCoord(), getWidth(), getHeight());
     }
 
-    public void setXCoord(int x){ xCoord = x; }
-    public void setYCoord(int y){ yCoord = y; }
-    public void setColor(int c){ color = c; }
-    public int  xCoord(){ return xCoord; }
-    public int  yCoord(){ return yCoord; }
-    public int  color(){ return color; }
-    public int  width(){ return width; }
-    public int  height(){ return height; }
-    public int  id() { return id; }
+    public int  getId() { return id; }
 }

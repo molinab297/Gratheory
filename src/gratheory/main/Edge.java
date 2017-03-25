@@ -5,58 +5,58 @@ import processing.core.PApplet;
  *  CLASS Edge
  *
  *  OVERVIEW: A class that represents a single Edge object. An edge
- *  object is defined to have a source and destination vertex, although
- *  in an undirected graph, this will not matter which vertex is which.
+ *  object is defined to have a source(a) and destination vertex(b),
+ *  although in an undirected graph, this will not matter which vertex
+ *  is which.
  *
  *  CONSTRUCTOR PARAMETERS:
- *   source <Vertex>  : source vertex
- *   dest<Vertex>     : destination vertex
- *   color<int>       : color of edge
- *   weight<int>      : weight of edge
+ *   a (Vertex)       : a connected vertex, A
+ *   b (Vertex)       : a connected vertex, B
+ *   color (int)      : color of edge
+ *   weight (int)     : weight of edge
  *
  ********************************************************************/
 public class Edge {
 
-    private Vertex source, dest;
+    private Vertex a, b;
     private int color, weight;
-    PApplet parent;
 
     public Edge(){
-        source = null;
-        dest = null;
-        color = 0;
+        a      = null;
+        b      = null;
+        color  = 0;
         weight = 0;
     }
 
-    public Edge(Vertex s, Vertex d, int c, int w){
-        source = s;
-        dest = d;
-        color = c;
-        weight = w;
+    public Edge(Vertex a, Vertex b, int color, int weight){
+        this.a = a;
+        this.b = b;
+        this.color  = color;
+        this.weight = weight;
     }
 
     /* Draws individual edge to screen */
     public void display(PApplet parent){
         parent.stroke(color);
-        parent.line(source.xCoord(),source.yCoord(),dest.xCoord(),dest.yCoord());
+        parent.line(a.getxCoord(),a.getyCoord(),b.getxCoord(),b.getyCoord());
     }
 
     public void setWeight(int w){
         weight = w;
     }
     public void setColor(int c){ color = c; }
-    public void setSource(Vertex s){
-        source = s;
+    public void connect(Vertex a, Vertex b){
+        this.a = a;
+        this.b = b;
     }
-    public void setDest(Vertex d){
-        dest = d;
-    }
-    public Vertex source() { return source; }
-    public Vertex dest() { return dest; }
-    public int color() {
+    public int getColor() {
         return color;
     }
-    public int weight() {
+    public int getWeight() {
         return weight;
     }
+    public boolean connects(Vertex a, Vertex b){
+        return (this.a == a && this.b == b || this.b == a && this.a == b);
+    }
+
 }

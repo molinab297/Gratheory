@@ -17,45 +17,43 @@ import java.util.ArrayList;
  ********************************************************************/
 public class Menu extends Button{
 
-    PApplet parent;
     private ArrayList<Button> buttonList; // holds the list of buttons
 
-    public Menu(int x, int y, int w, int h, int buttonColor, int textColor, String text, PApplet parent){
-        super(x,y,w,h,buttonColor,textColor, text, parent);
-        this.parent = parent;
+    public Menu(int x, int y, int w, int h, int buttonColor, int textColor, String text){
+        super(x,y,w,h,buttonColor,textColor, text);
         buttonList = new ArrayList<>();
     }
 
     public void addButton(String text){
-        buttonList.add(new Button(0,0,0,0,super.color(),super.textColor(),text, parent));
+        buttonList.add(new Button(0,0,0,0,super.getColor(),super.textColor(),text));
     }
 
     public void addButton(int buttonColor, String text){
-        buttonList.add(new Button(0,0,0,0,buttonColor,super.textColor(),text, parent));
+        buttonList.add(new Button(0,0,0,0,buttonColor,super.textColor(),text));
     }
 
     public void addButton(int buttonColor, int textColor, String text){
-        buttonList.add(new Button(0,0,0,0,buttonColor,textColor,text, parent));
+        buttonList.add(new Button(0,0,0,0,buttonColor,textColor,text));
     }
 
     /* Displays the menu button */
-    public void display(){
-        super.display();
+    public void display(PApplet draw){
+        super.display(draw);
     }
 
     /* Displays a dropdown list of all the other buttons */
-    public void displayOptions(){
-        int x = super.xCoord();
-        int y = super.yCoord();
-        int width = super.width();
-        int height = super.height();
+    public void displayOptions(PApplet draw){
+        int x = super.getxCoord();
+        int y = super.getyCoord();
+        int width = super.getWidth();
+        int height = super.getHeight();
         y = y + height;
 
         for(Button b : buttonList){
             b.setCoordinates(x,y);
             b.setSize(width,height);
-            b.display();
-            y = b.yCoord() + b.height();
+            b.display(draw);
+            y = b.getyCoord() + b.getHeight();
         }
     }
 

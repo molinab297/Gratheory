@@ -13,8 +13,8 @@ import java.util.Queue;
  *  graph and start vertex.
  *
  *  CONSTRUCTOR PARAMETERS:
- *      graph<Graph>  : graph to perform BFS on.
- *      start<Vertex> : starting vertex to perform algorithm.
+ *      graph (Graph)  : graph to perform BFS on.
+ *      start (Vertex) : starting vertex to perform algorithm.
  *
  ********************************************************************/
 public class BFS {
@@ -26,12 +26,12 @@ public class BFS {
         HashSet<Vertex> visited = new HashSet<>();
         queue.add(start);
         while(!queue.isEmpty()){
-            int row = queue.peek().id();
+            int row = queue.peek().getId();
             for(int i = 0; i < graph.columns(); i++){
                 if(graph.getIndex(row,i) == 1 && !visited.contains(graph.getVertex(i)) && !queue.contains(graph.getVertex(i))) {
                     queue.add(graph.getVertex(i));
-                    int highlight = graph.parent().color(0,191,255); /* Set highlight color to sky blue */
-                    graph.getEdge(queue.peek(), graph.getVertex(i)).setColor(highlight); /* Indicate which edges were used */
+                    /* Color edges */
+                    graph.getEdge(queue.peek(), graph.getVertex(i)).setColor(graph.parent().color(0,191,255));
                 }
             }
             visited.add(queue.peek());

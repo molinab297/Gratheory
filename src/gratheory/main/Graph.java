@@ -9,7 +9,7 @@ import static processing.core.PApplet.str;
  *  all vertices and edges in a graph.
  *
  *  CONSTRUCTOR PARAMETERS:
- *   otherMatrix<int[][]> : A Graph object only needs a single piece of
+ *   otherMatrix (int[][]) : A Graph object only needs a single piece of
  *   information. An adjancy matrix representation of a graph. This
  *   provides the information necessary to create all vertices and edges
  *   in the graph.
@@ -18,9 +18,9 @@ import static processing.core.PApplet.str;
 public class Graph {
 
     private PApplet parent;
-    private ArrayList<Vertex> vertexList; // Contains all the vertices in the graph
-    private ArrayList<Edge> edgeList; // Contains all the edges in the graph
-    private int [][]matrix; // Holds an adjancy matrix version of the graph, for initialization purposes.
+    private ArrayList<Vertex> vertexList;
+    private ArrayList<Edge> edgeList;
+    private int [][]matrix;
     private final int ROWS, COLUMNS;
 
     public Graph(int [][] otherMatrix, PApplet parent){
@@ -44,8 +44,8 @@ public class Graph {
 
         /* Initializes vertices */
         for (int x = 0; x < ROWS; x++)
-            vertexList.add(new Vertex(temp % (x + 1) * x + temp * (x + 1),
-                    temp % (x + 1) * temp + temp * (x + 1), 25, 25, 100, x));
+            vertexList.add(new Vertex(temp % (x + 12) * x + temp * (x + 12),
+                    temp % (x + 5) * temp + temp * (x + 5), 25, 25, 100, x));
 
         /* Initializes edges */
         for (int x = 0; x < ROWS; x++) {
@@ -65,7 +65,7 @@ public class Graph {
             v.display(parent);
             parent.fill(255, 255, 0);
             parent.textAlign(parent.CENTER, parent.CENTER);
-            parent.text(str(counter), v.xCoord(), v.yCoord());
+            parent.text(str(counter), v.getxCoord(), v.getyCoord());
             counter++;
         }
     }
@@ -83,9 +83,27 @@ public class Graph {
     }
 
 
+    /* Given two vertices, this function returns whether or a not an edge connects them. */
+    public boolean edgeExist(Vertex a, Vertex b){
+        for(Edge e : edgeList){
+            if(e.connects(a,b))
+                return true;
+        }
+        return false;
+    }
+
+    /* Returns the incident edge between vertex 'A' and vertex 'B' */
+    public Edge getEdge(Vertex a, Vertex b){
+            for(Edge e : edgeList){
+                if(e.connects(a,b))
+                    return edgeList.get(edgeList.indexOf(e));
+        }
+        return null;
+    }
+
+
     void addVertex(int x, int y, int w, int h, int c, int id){
-        Vertex newVertex = new Vertex(x,y,w,h,c, id);
-        vertexList.add(newVertex);
+        vertexList.add(new Vertex(x,y,w,h,c,id));
     }
 
     void addVertex(Vertex newVertex){
@@ -94,27 +112,6 @@ public class Graph {
 
     void addEdge(Vertex s, Vertex d, int c, int w){
         edgeList.add(new Edge(s,d,c,w));
-    }
-
-    /* Given two vertices, this function returns whether or a not an edge connects them. */
-    public boolean edgeExist(Vertex a, Vertex b){
-        for(Edge e : edgeList){
-            if(e.source().equals(b) && e.dest().equals(a) ||
-                    e.source().equals(a) && e.dest().equals(b)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /* Returns the incident edge between vertex 'A' and vertex 'B' */
-    public Edge getEdge(Vertex a, Vertex b){
-        for(Edge e : edgeList){
-            if(e.source().equals(a) && e.dest().equals(b)){
-                return edgeList.get(edgeList.indexOf(e));
-            }
-        }
-        return null;
     }
 
     public Vertex getVertex(int pos){
