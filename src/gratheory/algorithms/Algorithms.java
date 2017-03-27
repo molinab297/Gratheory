@@ -1,9 +1,8 @@
 package gratheory.algorithms;
 import gratheory.main.Graph;
 import gratheory.main.Vertex;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
+
+import java.util.*;
 
 
 /*******************************************************************
@@ -17,10 +16,11 @@ import java.util.Queue;
  *      start (Vertex) : starting vertex to perform algorithm.
  *
  ********************************************************************/
-public class BFS {
+public final class Algorithms {
 
-    public BFS(Graph graph, Vertex start){
+    private Algorithms(){}
 
+    public static void BFS(Graph graph, Vertex start) {
         /* BFS algorithm */
         Queue<Vertex> queue = new LinkedList<>();
         HashSet<Vertex> visited = new HashSet<>();
@@ -36,6 +36,34 @@ public class BFS {
             }
             visited.add(queue.peek());
             queue.remove();
+        }
+    }
+
+    public static void DFS(Graph graph, Vertex start) {
+
+        /* DFS algorithm */
+        Stack<Vertex> vertexStack = new Stack<>();
+        ArrayList<Vertex> visited = new ArrayList<>();
+        vertexStack.push(start);
+
+        while(!vertexStack.empty()){
+            Vertex v = vertexStack.pop();
+            if(!visited.contains(v)){
+                visited.add(v);
+
+                for(int i = 0; i < graph.columns(); i++){
+                    if(graph.getIndex(v.getId(),i) == 1) {
+                        vertexStack.push(graph.getVertex(i));
+                    }
+                }
+            }
+        }
+
+        /* Color edges */
+        for(int i = 0; i < visited.size()-1; i++){
+            Vertex a = graph.getVertex(visited.get(i).getId());
+            Vertex b = graph.getVertex(visited.get(i+1).getId());
+            graph.getEdge(a,b).setColor(graph.parent().color(0,191,255));
         }
     }
 }

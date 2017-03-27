@@ -19,30 +19,30 @@ public class Menu extends Button{
 
     private ArrayList<Button> buttonList; // holds the list of buttons
 
-    public Menu(int x, int y, int w, int h, int buttonColor, int textColor, String text){
-        super(x,y,w,h,buttonColor,textColor, text);
+    public Menu(int x, int y, int w, int h, int buttonColor, int textColor, String text, PApplet parent){
+        super(x,y,w,h,buttonColor,textColor, text, parent);
         buttonList = new ArrayList<>();
     }
 
     public void addButton(String text){
-        buttonList.add(new Button(0,0,0,0,super.getColor(),super.textColor(),text));
+        buttonList.add(new Button(0,0,0,0,super.getColor(),super.textColor(),text, parent));
     }
 
     public void addButton(int buttonColor, String text){
-        buttonList.add(new Button(0,0,0,0,buttonColor,super.textColor(),text));
+        buttonList.add(new Button(0,0,0,0,buttonColor,super.textColor(),text, parent));
     }
 
     public void addButton(int buttonColor, int textColor, String text){
-        buttonList.add(new Button(0,0,0,0,buttonColor,textColor,text));
+        buttonList.add(new Button(0,0,0,0,buttonColor,textColor,text, parent));
     }
 
-    /* Displays the menu button */
-    public void display(PApplet draw){
-        super.display(draw);
+    /// Displays the menu button
+    public void display(){
+        super.display();
     }
 
-    /* Displays a dropdown list of all the other buttons */
-    public void displayOptions(PApplet draw){
+    // Displays a dropdown list of all the other buttons
+    public void displayOptions(){
         int x = super.getxCoord();
         int y = super.getyCoord();
         int width = super.getWidth();
@@ -52,12 +52,12 @@ public class Menu extends Button{
         for(Button b : buttonList){
             b.setCoordinates(x,y);
             b.setSize(width,height);
-            b.display(draw);
+            b.display();
             y = b.getyCoord() + b.getHeight();
         }
     }
 
-    /* Detects if a mouse is hovering over this object */
+    // Detects if a mouse is hovering over this object
     public boolean overButton(int mouseX, int mouseY){
         return super.overButton(mouseX,mouseY);
     }

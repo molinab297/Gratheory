@@ -35,7 +35,7 @@ public class Edge {
         this.weight = weight;
     }
 
-    /* Draws individual edge to screen */
+    // Draws individual edge to screen
     public void display(PApplet parent){
         parent.stroke(color);
         parent.line(a.getxCoord(),a.getyCoord(),b.getxCoord(),b.getyCoord());
