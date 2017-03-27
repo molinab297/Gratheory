@@ -8,23 +8,26 @@ import processing.core.PApplet;
  *  that satisfy the requirements below.
  *
  *  CONSTRUCTOR PARAMETERS:
- *      xCoord (int) : x coordinate of shape
- *      yCoord (int) : y coordinate of shape
- *      width  (int) : width of shape
- *      height (int) : height of shape
- *      color  (int) : color of shape
+ *      xCoord (int)     : x coordinate of shape
+ *      yCoord (int)     : y coordinate of shape
+ *      width  (int)     : width of shape
+ *      height (int)     : height of shape
+ *      color  (int)     : color of shape
+ *      parent (PApplet) : Allows access to Processing's drawing methods
  *
  ********************************************************************/
 public abstract class Shape {
 
+    protected PApplet parent;
     private int xCoord, yCoord, width, height, color;
 
-    Shape(int xCoord, int yCoord, int width, int height, int color){
+    Shape(int xCoord, int yCoord, int width, int height, int color, PApplet parent){
         this.xCoord = xCoord;
         this.yCoord = yCoord;
         this.width  = width;
         this.height = height;
         this.color  = color;
+        this.parent = parent;
     }
 
     public int getxCoord() {
@@ -76,5 +79,6 @@ public abstract class Shape {
     public void setColor(int color) {
         this.color = color;
     }
+
 
 }

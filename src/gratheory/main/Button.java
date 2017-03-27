@@ -23,17 +23,17 @@ public class Button extends Shape{
     private String text;
     private int textColor;
 
-    public Button(int x, int y, int w, int h, int buttonColor, int tColor, String t){
-        super(x,y,w,h,buttonColor);
+    public Button(int x, int y, int w, int h, int buttonColor, int tColor, String t, PApplet parent){
+        super(x,y,w,h,buttonColor,parent);
         textColor = tColor;
         text   = t;
     }
 
-    void display(PApplet draw){
-        draw.fill(getColor());
-        draw.rect(getxCoord(), getyCoord(), getWidth(), getHeight());
-        draw.fill(textColor);
-        draw.text(text,getxCoord()+getWidth()/2,getyCoord()+getHeight()/2);
+    public void display(){
+        parent.fill(getColor());
+        parent.rect(getxCoord(), getyCoord(), getWidth(), getHeight());
+        parent.fill(textColor);
+        parent.text(text,getxCoord()+getWidth()/2,getyCoord()+getHeight()/2);
     }
 
     // Detects if a mouse is hovering over this object
@@ -42,11 +42,15 @@ public class Button extends Shape{
                 && mouseY >= getyCoord() && mouseY <= getyCoord() + getHeight());
     }
 
+    public void setText(String t){
+        text = t;
+    }
     public void setTextColor(int tc) {
         textColor = tc;
     }
     public int textColor() {
         return textColor;
     }
+    public String getText() { return text; }
 
 }

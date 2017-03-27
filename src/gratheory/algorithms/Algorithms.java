@@ -1,13 +1,14 @@
 package gratheory.algorithms;
 import gratheory.main.Graph;
 import gratheory.main.Vertex;
-import java.util.ArrayList;
-import java.util.Stack;
+
+import java.util.*;
+
 
 /*******************************************************************
- *  CLASS DFS(Depth First Search)
+ *  CLASS BFS(Breadth First Search)
  *
- *  OVERVIEW: Class that performs a depth first traversal on a given
+ *  OVERVIEW: Class that performs a breadth first traversal on a given
  *  graph and start vertex.
  *
  *  CONSTRUCTOR PARAMETERS:
@@ -15,9 +16,30 @@ import java.util.Stack;
  *      start (Vertex) : starting vertex to perform algorithm.
  *
  ********************************************************************/
-public class DFS {
+public final class Algorithms {
 
-    public DFS(Graph graph, Vertex start) {
+    private Algorithms(){}
+
+    public static void BFS(Graph graph, Vertex start) {
+        /* BFS algorithm */
+        Queue<Vertex> queue = new LinkedList<>();
+        HashSet<Vertex> visited = new HashSet<>();
+        queue.add(start);
+        while(!queue.isEmpty()){
+            int row = queue.peek().getId();
+            for(int i = 0; i < graph.columns(); i++){
+                if(graph.getIndex(row,i) == 1 && !visited.contains(graph.getVertex(i)) && !queue.contains(graph.getVertex(i))) {
+                    queue.add(graph.getVertex(i));
+                    /* Color edges */
+                    graph.getEdge(queue.peek(), graph.getVertex(i)).setColor(graph.parent().color(0,191,255));
+                }
+            }
+            visited.add(queue.peek());
+            queue.remove();
+        }
+    }
+
+    public static void DFS(Graph graph, Vertex start) {
 
         /* DFS algorithm */
         Stack<Vertex> vertexStack = new Stack<>();
@@ -44,5 +66,4 @@ public class DFS {
             graph.getEdge(a,b).setColor(graph.parent().color(0,191,255));
         }
     }
-
 }
