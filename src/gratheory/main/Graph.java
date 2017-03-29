@@ -1,6 +1,13 @@
 package gratheory.main;
 import processing.core.PApplet;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import static processing.core.PApplet.str;
 /*******************************************************************
  *  CLASS Graph
@@ -13,23 +20,34 @@ import static processing.core.PApplet.str;
  *   information. An adjancy matrix representation of a graph. This
  *   provides the information necessary to create all vertices and edges
  *   in the graph.
-
+ *
+ *   parent (PApplet) : A PApplet object that grants the class access
+ *   to Processing's drawing methods.
  ********************************************************************/
 public class Graph {
+
+    public static final int VERTEX_SIZE  = 40;
+    public static final int VERTEX_COLOR = 100;
+    public static final int EDGE_COLOR   = 255;
 
     private PApplet parent;
     private ArrayList<Vertex> vertexList;
     private ArrayList<Edge> edgeList;
     private int [][]matrix;
-    private final int ROWS, COLUMNS;
-    private final int VERTEX_SIZE = 40;
-    private final int EDGE_COLOR = 255;
+    private int numVertices;
+
+    public Graph(int n, String fileName, PApplet parent){
+        numVertices = n;
+        matrix = new int[numVertices][numVertices];
+        this.parent = parent;
+        readMatrix(fileName);
+        initializeGraph();
+    }
 
     public Graph(int [][] otherMatrix, PApplet parent){
         this.parent = parent;
-        COLUMNS = otherMatrix[0].length;
-        ROWS = otherMatrix.length;
-        matrix = new int[ROWS][COLUMNS];
+        numVertices = otherMatrix.length;
+        matrix = new int[numVertices][numVertices];
 
         for (int i = 0; i < otherMatrix.length; i++) {
             System.arraycopy(otherMatrix[i], 0, matrix[i], 0, otherMatrix[0].length);
@@ -44,14 +62,14 @@ public class Graph {
         edgeList   = new ArrayList<>();
         int temp = 27;
 
-        // Initialize Vertices *** Need to fix placement algo
-        for (int x = 0; x < ROWS; x++)
+        // Initialize Vertices *** Need to fix placement algorithm ***
+        for (int x = 0; x < numVertices; x++)
             vertexList.add(new Vertex(temp % (x + 15) * x + temp * (x + 15),
-                    temp % (x + 5) * temp + temp * (x + 5), VERTEX_SIZE, VERTEX_SIZE, 100, x, this.parent));
+                    temp % (x + 5) * temp + temp * (x + 5), VERTEX_SIZE, VERTEX_SIZE, VERTEX_COLOR, x, this.parent));
 
         // Initializes edges
-        for (int x = 0; x < ROWS; x++) {
-            for (int y = 0; y < COLUMNS; y++) {
+        for (int x = 0; x < numVertices; x++) {
+            for (int y = 0; y < numVertices; y++) {
                 if (matrix[x][y] == 1 && !edgeExist(vertexList.get(x),vertexList.get(y))) {
                         edgeList.add(new Edge(vertexList.get(x), vertexList.get(y), EDGE_COLOR, -1));
                 }
@@ -109,33 +127,83 @@ public class Graph {
             e.setColor(EDGE_COLOR);
     }
 
-    // Saves state of graph to an output file (created as an adjancy matrix)
-    public void saveGraph(){
-
+    // Saves state of graph to an output file
+    public void saveGraph(String filename){
+        try{
+            PrintWriter writer = new PrintWriter(filename, "UTF-8");
+            for(int i = 0; i < numVertices; i++){
+                for(int j = 0; j < numVertices; j++)
+                    writer.write(matrix[i][j] + " ");
+                writer.write("\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
-    void addVertex(int x, int y, int w, int h, int c, int id){
-        vertexList.add(new Vertex(x,y,w,h,c,id, this.parent));
+    // Reads adjancy matrix from file
+    private void readMatrix(String fileName){
+        int i = 0, j = 0;
+        try {
+            Scanner scanner = new Scanner(new File(fileName));
+            while(scanner.hasNext()){
+                int n = scanner.nextInt();
+                matrix[i][j] = n;
+                j++;
+
+                if(j == numVertices){
+                    i++;
+                    j = 0;
+                }
+            }
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String matrixToString(){
+        String result = "";
+        for(int i = 0; i < numVertices; i++){
+            for(int j = 0; j < numVertices; j++){
+                result += (matrix[i][j] + " ");
+            }
+            result += "\n";
+        }
+        return result;
     }
 
     void addVertex(Vertex newVertex){
         vertexList.add(newVertex);
+        resizeMatrix();
+    }
+
+    // Increases size of the matrix diagonally by 1
+    private void resizeMatrix(){
+        int[][] newMatrix = new int[numVertices+1][numVertices+1];
+        for(int i = 0; i < numVertices; i++){
+            for(int j = 0; j < numVertices; j++)
+                newMatrix[i][j] = this.matrix[i][j];
+        }
+        this.matrix = newMatrix;
+        numVertices++;
     }
 
     void addEdge(Vertex s, Vertex d, int c, int w){
         edgeList.add(new Edge(s,d,c,w));
+        // Updates adjancy matrix
+        matrix[s.getId()][d.getId()] = 1;
+        matrix[d.getId()][s.getId()] = 1;
     }
 
     public Vertex getVertex(int pos){
         return vertexList.get(pos);
     }
 
-    public final int rows() {
-        return ROWS;
-    }
-    public final int columns() {
-        return COLUMNS;
+    public final int numVertices() {
+        return numVertices;
     }
 
     public ArrayList<Vertex> getVertexList () { return vertexList; }
