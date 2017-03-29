@@ -27,10 +27,10 @@ public final class Algorithms {
         queue.add(start);
         while(!queue.isEmpty()){
             int row = queue.peek().getId();
-            for(int i = 0; i < graph.columns(); i++){
+            for(int i = 0; i < graph.getVertexCount(); i++){
                 if(graph.getIndex(row,i) == 1 && !visited.contains(graph.getVertex(i)) && !queue.contains(graph.getVertex(i))) {
                     queue.add(graph.getVertex(i));
-                    /* Color edges */
+                    // color edges
                     graph.getEdge(queue.peek(), graph.getVertex(i)).setColor(graph.parent().color(0,191,255));
                 }
             }
@@ -51,7 +51,7 @@ public final class Algorithms {
             if(!visited.contains(v)){
                 visited.add(v);
 
-                for(int i = 0; i < graph.columns(); i++){
+                for(int i = 0; i < graph.getVertexCount(); i++){
                     if(graph.getIndex(v.getId(),i) == 1) {
                         vertexStack.push(graph.getVertex(i));
                     }
@@ -59,7 +59,7 @@ public final class Algorithms {
             }
         }
 
-        /* Color edges */
+        // color edges
         for(int i = 0; i < visited.size()-1; i++){
             Vertex a = graph.getVertex(visited.get(i).getId());
             Vertex b = graph.getVertex(visited.get(i+1).getId());

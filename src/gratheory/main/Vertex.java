@@ -1,8 +1,6 @@
 package gratheory.main;
 import processing.core.PApplet;
 
-import java.util.HashSet;
-
 
 /*******************************************************************
  *  CLASS Vertex
