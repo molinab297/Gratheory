@@ -1,10 +1,9 @@
 package gratheory.main;
 import processing.core.PApplet;
-
 import java.util.ArrayList;
 
 /*******************************************************************
- *  CLASS Menu EXTENDS Button
+ *  CLASS ButtonList EXTENDS Shape
  *
  *  OVERVIEW: A class that represents a Menu object. While a Menu is
  *  a type of button, it contains a drop down list of clickable buttons.
@@ -15,21 +14,17 @@ import java.util.ArrayList;
  *  CONSTRUCTOR PARAMETERS:
  *   - (Refer to CLASS Button)
  ********************************************************************/
-public class Menu extends Button{
+public class ButtonList extends Shape{
 
     private ArrayList<Button> buttonList; // holds the list of buttons
 
-    public Menu(int x, int y, int w, int h, int buttonColor, int textColor, String text, PApplet parent){
-        super(x,y,w,h,buttonColor,textColor, text, parent);
+    public ButtonList(int xCoord, int yCoord, int width, int height, int color, PApplet parent){
+        super(xCoord, yCoord, width, height, color, parent);
         buttonList = new ArrayList<>();
     }
 
-    public void addButton(String text){
-        buttonList.add(new Button(0,0,0,0,super.getColor(),super.textColor(),text, parent));
-    }
-
-    public void addButton(int buttonColor, String text){
-        buttonList.add(new Button(0,0,0,0,buttonColor,super.textColor(),text, parent));
+    public void addButton(Button newButton){
+        buttonList.add(newButton);
     }
 
     public void addButton(int buttonColor, int textColor, String text){
@@ -38,11 +33,6 @@ public class Menu extends Button{
 
     /// Displays the menu button
     public void display(){
-        super.display();
-    }
-
-    // Displays a dropdown list of all the other buttons
-    public void displayOptions(){
         int x = super.getxCoord();
         int y = super.getyCoord();
         int width = super.getWidth();
@@ -57,10 +47,6 @@ public class Menu extends Button{
         }
     }
 
-    // Detects if a mouse is hovering over this object
-    public boolean overButton(int mouseX, int mouseY){
-        return super.overButton(mouseX,mouseY);
-    }
 
     public Button getButton(int pos){
         return buttonList.get(pos);
