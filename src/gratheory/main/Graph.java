@@ -16,10 +16,8 @@ import static processing.core.PApplet.str;
  *  all vertices and edges in a graph.
  *
  *  CONSTRUCTOR PARAMETERS:
- *   otherMatrix (int[][]) : A Graph object only needs a single piece of
- *   information. An adjancy matrix representation of a graph. This
- *   provides the information necessary to create all vertices and edges
- *   in the graph.
+ *   filename (String) : The path to a text file containing the
+ *   adjancy matrix.
  *
  *   parent (PApplet) : A PApplet object that grants the class access
  *   to Processing's drawing methods.
@@ -39,18 +37,6 @@ public class Graph {
     public Graph(String fileName, PApplet parent){
         this.parent = parent;
         readMatrix(fileName);
-        initializeGraph();
-    }
-
-    public Graph(int [][] otherMatrix, PApplet parent){
-        this.parent = parent;
-        vertexCount = otherMatrix.length;
-        matrix = new int[vertexCount][vertexCount];
-
-        for (int i = 0; i < otherMatrix.length; i++) {
-            System.arraycopy(otherMatrix[i], 0, matrix[i], 0, otherMatrix[0].length);
-        }
-
         initializeGraph();
     }
 

@@ -16,6 +16,8 @@ import processing.core.PApplet;
  *   buttonColor (int) : RGB/Grayscale color of button
  *   tColor (int)      : RGB/Grayscale color of text
  *   t (String)        : Text of the button
+ *   parent (PApplet)  : A PApplet object that grants the class access
+ *   to Processing's drawing methods.
  *
  *   Note: to pass an RGB color, pass parameter as (PApplet object).color(r,g,b).
  ********************************************************************/

@@ -79,7 +79,7 @@ public class Gratheory extends PApplet{
     public void update(){
         if(vertexClicked){
             vertexOptions.setCoordinates(graph.getVertex(vertexID).getxCoord()
-                    + 10, graph.getVertex(vertexID).getyCoord() + 10);
+                    +50, graph.getVertex(vertexID).getyCoord()-50);
             vertexOptions.display();
             graphOptionWindow = false;
         }
