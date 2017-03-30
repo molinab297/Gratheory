@@ -5,17 +5,6 @@ import gratheory.main.Vertex;
 import java.util.*;
 
 
-/*******************************************************************
- *  CLASS BFS(Breadth First Search)
- *
- *  OVERVIEW: Class that performs a breadth first traversal on a given
- *  graph and start vertex.
- *
- *  CONSTRUCTOR PARAMETERS:
- *      graph (Graph)  : graph to perform BFS on.
- *      start (Vertex) : starting vertex to perform algorithm.
- *
- ********************************************************************/
 public final class Algorithms {
 
     private Algorithms(){}
