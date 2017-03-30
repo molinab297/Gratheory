@@ -39,6 +39,7 @@ public class Edge {
     public void display(PApplet parent){
         parent.stroke(color);
         parent.line(a.getxCoord(),a.getyCoord(),b.getxCoord(),b.getyCoord());
+        parent.stroke(255);
     }
 
     public void setWeight(int w){

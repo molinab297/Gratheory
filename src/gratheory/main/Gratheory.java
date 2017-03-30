@@ -133,13 +133,14 @@ public class Gratheory extends PApplet{
 
     // Checks if user is clicking graph options menu
     private void checkIfClickingGraphOptions(){
-        if(graphOptions.getButton(0).overButton(mouseX,mouseY)){
-            graph.addVertex(new Vertex(mouseX, mouseY, graph.VERTEX_SIZE, graph.VERTEX_SIZE, graph.VERTEX_COLOR, graph.getVertexCount(), this));
-            graphOptionWindow = false;
-        }
-        else if(graphOptions.getButton(1).overButton(mouseX,mouseY)){
-            graph.saveGraph(INPUT_FILE);
-            graphOptionWindow = false;
+        if(graphOptionWindow) {
+            if (graphOptions.getButton(0).overButton(mouseX, mouseY)) {
+                graph.addVertex(new Vertex(mouseX, mouseY, graph.VERTEX_SIZE, graph.VERTEX_SIZE, graph.VERTEX_COLOR, graph.getVertexCount(), this));
+                graphOptionWindow = false;
+            } else if (graphOptions.getButton(1).overButton(mouseX, mouseY)) {
+                graph.saveGraph(INPUT_FILE);
+                graphOptionWindow = false;
+            }
         }
     }
 

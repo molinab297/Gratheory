@@ -69,7 +69,7 @@ public final class Algorithms {
 
     // Brute force Hamiltonian algorithm complexity : Worst case O(N!)
     public static void HamiltonianCircuit(Graph graph){
-        hamCycle(graph.getMatrix());
+        hamCycle(graph);
     }
 
     /* A recursive utility function to solve hamiltonian
@@ -101,19 +101,22 @@ public final class Algorithms {
     possible, otherwise return true and prints the path.
     Note that there may be more than one solutions,
     this function prints one of the feasible solutions. */
-    private static int hamCycle(int graph[][])
+    private static void hamCycle(Graph graph)
     {
         LinkedList<Integer> visited = new LinkedList<Integer>();
-        if (hamCycleUtil(graph, 0, visited))
-        {
-            System.out.println("\nA Hamiltonian path exists");
-            for(int i : visited){
-                System.out.print(" "+i);
+        if (hamCycleUtil(graph.getMatrix(), 0, visited)) {
+            int curr = visited.get(1);
+            for(int i = 0; i < visited.size()-1; i++){
+                //color edges
+                graph.getEdge(graph.getVertex(i), graph.getVertex(curr)).setColor(graph.parent().color(0,191,255));
+                curr = i;
             }
-        }else{
-            System.out.println("\nA Hamiltonian path does not exist");
+            // color last edge
+            graph.getEdge(graph.getVertex(curr), graph.getVertex(0)).setColor(graph.parent().color(0,191,255));
         }
-
-        return 1;
+        else{
+            for(Vertex v : graph.getVertexList())
+                v.setColor(graph.parent().color(255,0,0));
+        }
     }
 }

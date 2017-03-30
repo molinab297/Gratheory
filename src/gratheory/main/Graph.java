@@ -119,10 +119,12 @@ public class Graph {
         return null;
     }
 
-    // Reset colors on edges back to white
+    // Reset colors of graph back to normal
     public void clear(){
         for(Edge e : edgeList)
             e.setColor(EDGE_COLOR);
+        for(Vertex v : vertexList)
+            v.setColor(VERTEX_COLOR);
     }
 
     // Saves state of graph to an output file
