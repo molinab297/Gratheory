@@ -212,6 +212,9 @@ public class Graph {
 
     public ArrayList<Vertex> getVertexList () { return vertexList; }
 
+    // Returns entire adjancy matrix
+    public int[][] getMatrix() { return matrix; }
+
     // Returns index of the graph's adjancy matrix
     public int getIndex(int x, int y) { return matrix[x][y]; }
 

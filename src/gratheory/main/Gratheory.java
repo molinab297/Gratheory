@@ -6,7 +6,7 @@ public class Gratheory extends PApplet{
 
     public static void main(String[] args) { PApplet.main("gratheory.main.Gratheory"); }
 
-    // Color constants
+    // Frequently used Processing color constants
     public static final int WHITE = 255, GRAY = 167, BLACK = 0;
 
     public static final int SCREEN_WIDTH   = 1000;
@@ -30,6 +30,8 @@ public class Gratheory extends PApplet{
         vertexOptions.addButton(GRAY, BLACK, "DFS");
         vertexOptions.addButton(GRAY, BLACK, "BFS");
         vertexOptions.addButton(GRAY, BLACK, "Add edge");
+        vertexOptions.addButton(GRAY, BLACK, "Hamiltonian");
+        vertexOptions.addButton(GRAY, BLACK, "Euler Cycle");
         graphOptions.addButton(GRAY, BLACK, "New Vertex");
         graphOptions.addButton(GRAY, BLACK, "Save Graph");
 
@@ -100,18 +102,26 @@ public class Gratheory extends PApplet{
 
         // Performs a specific operation on a vertex
         if (vertexClicked) {
+            // Perform DFS
             if (vertexOptions.getButton(0).overButton(mouseX, mouseY)) {
                 graph.clear();
                 Algorithms.DFS(graph, graph.getVertex(vertexID));
             }
+            // Perform BFS
             else if (vertexOptions.getButton(1).overButton(mouseX, mouseY)) {
                 graph.clear();
                 Algorithms.BFS(graph, graph.getVertex(vertexID));
             }
+            // Add edge
             else if (vertexOptions.getButton(2).overButton(mouseX, mouseY)) {
                 startVertex = vertexID;
                 addEdgeSelected = true;
                 vertexClicked = false;
+            }
+            // Perform Hamiltonian Algorithm
+            else if(vertexOptions.getButton(3).overButton(mouseX, mouseY)){
+                graph.clear();
+                Algorithms.HamiltonianCircuit(graph);
             }
             else if(addEdgeSelected){
                 endVertex = vertexID;
