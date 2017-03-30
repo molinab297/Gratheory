@@ -66,4 +66,57 @@ public final class Algorithms {
             graph.getEdge(a,b).setColor(graph.parent().color(0,191,255));
         }
     }
+
+    // Brute force Hamiltonian algorithm complexity : Worst case O(N!)
+    public static void HamiltonianCircuit(Graph graph){
+        hamCycle(graph);
+    }
+
+    /* A recursive utility function to solve hamiltonian
+    cycle problem */
+    private static boolean hamCycleUtil(int graph[][], int node, LinkedList<Integer> visited)
+    {
+        if(visited.contains(node)){
+            if(visited.size()==graph.length && node==0){
+                visited.add(node);
+                return true;
+            }
+            return false;
+        }
+
+        visited.add(node);
+        int[] list = graph[node];
+        for(int i=0;i<list.length;i++){
+            if(list[i]==1 && hamCycleUtil(graph,i,visited)){
+                return true;
+            }
+        }
+        visited.pollLast();
+        return false;
+    }
+
+    /* This function solves the Hamiltonian Cycle problem using
+    Backtracking. It mainly uses hamCycleUtil() to solve the
+    problem. It returns false if there is no Hamiltonian Cycle
+    possible, otherwise return true and prints the path.
+    Note that there may be more than one solutions,
+    this function prints one of the feasible solutions. */
+    private static void hamCycle(Graph graph)
+    {
+        LinkedList<Integer> visited = new LinkedList<Integer>();
+        if (hamCycleUtil(graph.getMatrix(), 0, visited)) {
+            int curr = visited.get(1);
+            for(int i = 0; i < visited.size()-1; i++){
+                //color edges
+                graph.getEdge(graph.getVertex(i), graph.getVertex(curr)).setColor(graph.parent().color(0,191,255));
+                curr = i;
+            }
+            // color last edge
+            graph.getEdge(graph.getVertex(curr), graph.getVertex(0)).setColor(graph.parent().color(0,191,255));
+        }
+        else{
+            for(Vertex v : graph.getVertexList())
+                v.setColor(graph.parent().color(255,0,0));
+        }
+    }
 }
