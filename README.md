@@ -6,7 +6,7 @@ Gratheory - a lightweight Processing 3 app for visualizing graph theory algorith
 Supported algorithms as of right now:
   - Breadth First traversal
   - Depth First search
-  - Hamiltonian Circuit traversal 
+  - Hamiltonian Circuit traversal (An exponential solution as this problem is still currently NP-Complete)
   
 Soon to support:
   - Dijkstra's algorithm
