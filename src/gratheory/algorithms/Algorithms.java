@@ -5,6 +5,12 @@ import gratheory.main.Vertex;
 import java.util.*;
 
 
+/*******************************************************************
+ *  FINAL CLASS Algorithms
+ *
+ *  OVERVIEW: A final class that contains static methods
+ *  for performing various graph theory algorithms.
+ ********************************************************************/
 public final class Algorithms {
 
     private Algorithms(){}
@@ -61,8 +67,7 @@ public final class Algorithms {
         hamCycle(graph);
     }
 
-    /* A recursive utility function to solve hamiltonian
-    cycle problem */
+    // A recursive utility function to solve hamiltonian cycle problem
     private static boolean hamCycleUtil(int graph[][], int node, LinkedList<Integer> visited)
     {
         if(visited.contains(node)){
@@ -88,8 +93,8 @@ public final class Algorithms {
     Backtracking. It mainly uses hamCycleUtil() to solve the
     problem. It returns false if there is no Hamiltonian Cycle
     possible, otherwise return true and prints the path.
-    Note that there may be more than one solutions,
-    this function prints one of the feasible solutions. */
+    Note that there may be more than one solution,
+    however this function prints only one of them. */
     private static void hamCycle(Graph graph)
     {
         LinkedList<Integer> visited = new LinkedList<Integer>();

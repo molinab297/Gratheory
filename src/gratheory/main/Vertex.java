@@ -1,5 +1,7 @@
 package gratheory.main;
 import processing.core.PApplet;
+import static processing.core.PApplet.sq;
+import static processing.core.PApplet.sqrt;
 
 
 /*******************************************************************
@@ -28,8 +30,13 @@ public class Vertex extends Shape{
 
     // Detects if a mouse is hovering over this object
     public boolean overVertex(int mouseX, int mouseY) {
-        return (mouseX >= getxCoord() && mouseX <= getxCoord() + getWidth()
-                && mouseY >= getyCoord() && mouseY <= getyCoord() + getHeight());
+        float disX = getxCoord() - mouseX;
+        float disY = getyCoord() - mouseY;
+        if (sqrt(sq(disX) + sq(disY)) < getWidth()/2 ) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public int  getId() { return id; }
