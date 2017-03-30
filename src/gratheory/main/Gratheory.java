@@ -31,7 +31,8 @@ public class Gratheory extends PApplet{
         vertexOptions.addButton(GRAY, BLACK, "BFS");
         vertexOptions.addButton(GRAY, BLACK, "Add edge");
         vertexOptions.addButton(GRAY, BLACK, "Hamiltonian");
-        vertexOptions.addButton(GRAY, BLACK, "Euler Cycle");
+        vertexOptions.addButton(GRAY, BLACK, "Delete vertex");
+        vertexOptions.addButton(GRAY, BLACK, "Delete edge");
         graphOptions.addButton(GRAY, BLACK, "New Vertex");
         graphOptions.addButton(GRAY, BLACK, "Save Graph");
 
@@ -122,6 +123,14 @@ public class Gratheory extends PApplet{
             else if(vertexOptions.getButton(3).overButton(mouseX, mouseY)){
                 graph.clear();
                 Algorithms.HamiltonianCircuit(graph);
+            }
+            // Delete vertex
+            else if(vertexOptions.getButton(4).overButton(mouseX, mouseY)){
+
+            }
+            // Delete edge
+            else if(vertexOptions.getButton(5).overButton(mouseX, mouseY)){
+
             }
             else if(addEdgeSelected){
                 endVertex = vertexID;

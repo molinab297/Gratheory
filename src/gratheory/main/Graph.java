@@ -186,6 +186,7 @@ public class Graph {
         resizeMatrix();
     }
 
+
     // Increases size of the matrix diagonally by 1
     private void resizeMatrix(){
         int[][] newMatrix = new int[vertexCount+1][vertexCount+1];
