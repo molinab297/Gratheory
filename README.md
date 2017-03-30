@@ -3,6 +3,15 @@
 # Gratheory
 Gratheory - a lightweight Processing 3 app for visualizing graph theory algorithms.
 
+Supported algorithms as of right now:
+  - Breadth First traversal
+  - Depth First search
+  - Hamiltonian Circuit traversal 
+  
+Soon to support:
+  - Dijkstra's algorithm
+  - Planar determinability
+
 Follow these steps to contribute to this project: [[Waffle-Git Branching Tutorial](https://github.com/waffleio/waffle.io)]
 
 Link to project board: https://waffle.io/molinab297/Gratheory
