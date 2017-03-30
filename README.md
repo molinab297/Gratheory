@@ -9,5 +9,5 @@ Link to project board: https://waffle.io/molinab297/Gratheory
 
 Picture of Application finding a Hamiltonian circuit in K6 graph.
 
-![Alt text] (https://cloud.githubusercontent.com/assets/10769110/24485880/e19e959a-14bb-11e7-9bca-b6d82cdf8672.png)
+![ALT] https://cloud.githubusercontent.com/assets/10769110/24485934/34b4dfd2-14bc-11e7-985b-2d26e3feef43.png
 
