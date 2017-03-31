@@ -10,7 +10,7 @@ Supported algorithms as of right now:
   
 Soon to support:
   - Dijkstra's algorithm
-  - Planar determinability
+  - Planar determinability (Using Kuratowski's Theorem)
   - Possibly Euler Cycle/Path determinability
 
 Follow these steps to contribute to this project: [[Waffle-Git Branching Tutorial](https://github.com/waffleio/waffle.io)]
