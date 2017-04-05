@@ -9,8 +9,8 @@ public class Gratheory extends PApplet{
     // Frequently used Processing color constants
     public static final int WHITE = 255, GRAY = 167, BLACK = 0;
 
-    public static final int SCREEN_WIDTH   = 1000;
-    public static final int SCREEN_HEIGHT  = 650;
+    public static final int SCREEN_WIDTH   = 1200;
+    public static final int SCREEN_HEIGHT  = 750;
     private final String INPUT_FILE        = "/Users/Blake/IdeaProjects/Gratheory/src/gratheory/resources/AdjancyMatrix.txt";
     private Graph graph;
     private ButtonList vertexOptions, graphOptions;
@@ -134,7 +134,7 @@ public class Gratheory extends PApplet{
             }
             else if(addEdgeSelected){
                 endVertex = vertexID;
-                graph.addEdge(graph.getVertex(startVertex), graph.getVertex(endVertex),WHITE,0);
+                graph.addEdge(graph.getVertex(startVertex), graph.getVertex(endVertex),WHITE,100);
                 addEdgeSelected = false;
             }
         }

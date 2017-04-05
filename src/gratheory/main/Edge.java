@@ -21,13 +21,6 @@ public class Edge {
     private Vertex a, b;
     private int color, weight;
 
-    public Edge(){
-        a      = null;
-        b      = null;
-        color  = 0;
-        weight = 0;
-    }
-
     public Edge(Vertex a, Vertex b, int color, int weight){
         this.a = a;
         this.b = b;

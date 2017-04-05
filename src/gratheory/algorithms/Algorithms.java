@@ -99,16 +99,13 @@ public final class Algorithms {
     {
         LinkedList<Integer> visited = new LinkedList<Integer>();
         if (hamCycleUtil(graph.getMatrix(), 0, visited)) {
-            int curr = visited.get(1);
             for(int i = 0; i < visited.size()-1; i++){
                 //color edges
-                graph.getEdge(graph.getVertex(i), graph.getVertex(curr)).setColor(graph.parent().color(0,191,255));
-                curr = i;
+                graph.getEdge(graph.getVertex(visited.get(i)),
+                        graph.getVertex(visited.get(i+1))).setColor(graph.parent().color(0,191,255));
             }
-            // color last edge
-            graph.getEdge(graph.getVertex(curr), graph.getVertex(0)).setColor(graph.parent().color(0,191,255));
         }
-        else{
+        else{ // color graph red if path does not exist
             for(Vertex v : graph.getVertexList())
                 v.setColor(graph.parent().color(255,0,0));
         }
