@@ -11,6 +11,7 @@ Supported algorithms as of right now:
 Will eventually support:
   - Dijkstras
   - Planar determinability (Using Kuratowski's Theorem)
+  - Other various graph algorithms from math 270A/B book 
 
 Follow these steps to contribute to this project: [[Waffle-Git Branching Tutorial](https://github.com/waffleio/waffle.io)]
 
