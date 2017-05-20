@@ -11,7 +11,7 @@ public class Gratheory extends PApplet{
 
     public static final int SCREEN_WIDTH   = 1200;
     public static final int SCREEN_HEIGHT  = 750;
-    private final String INPUT_FILE        = "/Users/Blake/IdeaProjects/Gratheory/src/gratheory/resources/AdjancyMatrix.txt";
+    private final String INPUT_FILE        = "src/gratheory/resources/AdjancyMatrix.txt";
     private Graph graph;
     private ButtonList vertexOptions, graphOptions;
     private boolean vertexClicked, addEdgeSelected, graphOptionWindow;
