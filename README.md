@@ -3,12 +3,12 @@
 # Gratheory
 Gratheory - a lightweight Java/Processing 3 app for visualizing graph theory algorithms.
 
-Supported algorithms as of right now:
+## Supported algorithms as of right now:
   - Breadth First search
   - Depth First search
   - Hamiltonian Circuit traversal (An exponential solution as this problem is still currently NP-Complete)
   
-Will eventually support:
+## Will eventually support:
   - Dijkstras
   - Planar determinability (Using Kuratowski's Theorem)
   - Other various graph algorithms from math 270A/B book 
